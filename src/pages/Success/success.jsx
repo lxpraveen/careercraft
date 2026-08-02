@@ -1,15 +1,13 @@
 const Success = () => {
   return (
-    <div className="min-h-screen bg-slate-950 flex justify-center items-center">
-      <div className="bg-slate-900 p-10 rounded-2xl text-center">
-        <h1 className="text-6xl">🎉</h1>
+    <div className="min-h-screen flex items-center justify-center bg-slate-950 text-white">
+      <div className="text-center">
+        <h1 className="text-4xl font-bold text-green-400">
+          Payment Successful 🎉
+        </h1>
 
-        <h2 className="text-4xl text-white mt-5">
-          Order Submitted
-        </h2>
-
-        <p className="text-gray-400 mt-4">
-          We have received your order.
+        <p className="mt-4">
+          Thank you for your order.
         </p>
       </div>
     </div>
