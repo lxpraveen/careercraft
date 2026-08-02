@@ -5,7 +5,7 @@ const Payment = () => {
 
   const handlePayment = () => {
     alert("Payment Successful ✅");
-    navigate("/service-form");
+    navigate("/service");
   };
 
   return (

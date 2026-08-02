@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const services = [
   {
@@ -59,6 +59,8 @@ const services = [
 ];
 
 const Services = () => {
+  const navigate = useNavigate();
+
   return (
     <section className="min-h-screen bg-slate-950 text-white py-20 px-6">
       <div className="max-w-7xl mx-auto">
@@ -84,12 +86,15 @@ const Services = () => {
                 ))}
               </ul>
 
-              <Link
-                to="/payment"
-                className="block mt-8 bg-cyan-500 text-center py-3 rounded-xl hover:bg-cyan-600"
+              <button
+                onClick={() => {
+                  console.log("Buy Now Clicked");
+                  navigate("/payment");
+                }}
+                className="w-full mt-8 bg-cyan-500 py-3 rounded-xl hover:bg-cyan-600"
               >
                 Buy Now
-              </Link>
+              </button>
             </div>
           ))}
         </div>
