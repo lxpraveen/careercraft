@@ -1,7 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
 import MainLayout from "../layouts/MainLayout";
-
 import Home from "../pages/Home/Home";
 import Services from "../components/ServicesSection/ServicesSection";
 import About from "../pages/About/About";
@@ -25,9 +23,9 @@ const AppRoutes = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/payment" element={<Payment />} />
-<Route path="/service-form" element={<ServiceForm />} />
-<Route path="/success" element={<Success />} />
-<Route path="/order" element={<OrderForm />} />
+          <Route path="/service" element={<ServiceForm />} />
+          <Route path="/Success" element={<Success />} />
+          <Route path="/OrderForm" element={<OrderForm />} />
         </Route>
 
         <Route path="*" element={<NotFound />} />
