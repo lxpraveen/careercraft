@@ -14,8 +14,8 @@ const Hero = () => {
       <BackgroundGlow />
       <FloatingIcons />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 py-24">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-24">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
           {/* LEFT */}
 
@@ -25,7 +25,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: 60 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="text-5xl md:text-7xl font-extrabold leading-tight"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight text-center lg:text-left"
             >
               Get Hired Faster
               <br />
@@ -43,7 +43,7 @@ const Hero = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.8 }}
-              className="text-2xl font-semibold text-cyan-300 mt-8 h-10"
+              className="text-lg sm:text-xl md:text-2xl font-semibold text-cyan-300 mt-6 h-12 text-center lg:text-left"
             >
               <TypeAnimation
                 sequence={[
@@ -65,7 +65,7 @@ const Hero = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1.2 }}
-              className="mt-8 text-lg text-slate-300 leading-8 max-w-xl"
+             className="mt-6 text-base sm:text-lg text-slate-300 leading-7 max-w-xl mx-auto lg:mx-0 text-center lg:text-left"
             >
               India's Premium Career Optimization Platform helping job seekers
               build ATS-friendly resumes, optimize LinkedIn profiles,
@@ -78,7 +78,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.5 }}
-              className="flex gap-5 mt-10 flex-wrap"
+              className="flex flex-col sm:flex-row gap-4 mt-8 justify-center lg:justify-start"
             >
               <motion.button
                 whileHover={{
@@ -87,7 +87,7 @@ const Hero = () => {
                 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => navigate("/services")}
-                className="px-8 py-4 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-500 font-semibold"
+                className="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-500 font-semibold"
               >
                 🚀 Explore Services
               </motion.button>
@@ -99,7 +99,7 @@ const Hero = () => {
                 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => navigate("/contact")}
-                className="px-8 py-4 rounded-xl border-2 border-cyan-500 font-semibold"
+                className="w-full sm:w-auto px-8 py-4 rounded-xl border-2 border-cyan-500 font-semibold"
               >
                 📞 Contact Us
               </motion.button>
@@ -111,7 +111,7 @@ const Hero = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 2 }}
-              className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16"
+              className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12 text-center"
             >
               <div>
                 <h2 className="text-4xl font-bold text-cyan-400">1000+</h2>
@@ -142,7 +142,7 @@ const Hero = () => {
             initial={{ opacity: 0, x: 120 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1 }}
-            className="flex justify-center"
+           className="flex justify-center mt-10 lg:mt-0"
           >
             <AnimatedLaptop />
           </motion.div>

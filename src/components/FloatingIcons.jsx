@@ -11,28 +11,28 @@ const FloatingIcons = () => {
     {
       Icon: FaLinkedin,
       top: "18%",
-      left: "12%",
+      left: "8%",
       delay: 0,
       color: "text-blue-400",
     },
     {
       Icon: FaFileAlt,
-      top: "65%",
-      left: "20%",
+      top: "68%",
+      left: "12%",
       delay: 1,
       color: "text-cyan-400",
     },
     {
       Icon: FaBriefcase,
-      top: "25%",
-      right: "12%",
+      top: "22%",
+      right: "8%",
       delay: 2,
       color: "text-green-400",
     },
     {
       Icon: FaAward,
-      top: "70%",
-      right: "18%",
+      top: "72%",
+      right: "12%",
       delay: 3,
       color: "text-yellow-400",
     },
@@ -43,10 +43,10 @@ const FloatingIcons = () => {
       {icons.map(({ Icon, delay, color, ...pos }, index) => (
         <motion.div
           key={index}
-          className={`absolute ${color} text-4xl`}
+          className={`absolute ${color} z-0`}
           style={pos}
           animate={{
-            y: [0, -25, 0],
+            y: [0, -20, 0],
             rotate: [0, 10, -10, 0],
           }}
           transition={{
@@ -55,8 +55,20 @@ const FloatingIcons = () => {
             delay,
           }}
         >
-          <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-4 border border-white/10 shadow-xl">
-            <Icon />
+          <div
+            className="
+              bg-white/10
+              backdrop-blur-xl
+              rounded-xl
+              p-2
+              sm:p-3
+              lg:p-4
+              border
+              border-white/10
+              shadow-xl
+            "
+          >
+            <Icon className="text-xl sm:text-2xl lg:text-4xl" />
           </div>
         </motion.div>
       ))}
