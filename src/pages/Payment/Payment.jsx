@@ -1,22 +1,38 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
+import { useEffect } from "react";
+import { auth } from "../../firebase";
 
+console.log("Received:", location.state);
 const API_URL = "https://careercraft-j02i.onrender.com";
 
 const Payment = () => {
   const navigate = useNavigate();
 
+const location = useLocation();
+
+console.log(location.state);
+  
+  const service = location.state || {
+    name: "CareerCraft Service",
+    price: 19,
+  };
+  useEffect(() => {
+  if (!auth.currentUser) {
+    alert("Please login first");
+    navigate("/login");
+  }
+}, []);
+  console.log(service);
+
   const handlePayment = async () => {
     try {
-      // Backend se Razorpay Order create karo
       const { data: order } = await axios.post(
         `${API_URL}/create-order`,
         {
-          amount: 999,
+          amount: service.price,
         }
       );
-
-      console.log("Order:", order);
 
       const options = {
         key: import.meta.env.VITE_RAZORPAY_KEY_ID,
@@ -26,7 +42,7 @@ const Payment = () => {
         order_id: order.id,
 
         name: "CareerCraft",
-        description: "CareerCraft Service Payment",
+        description: service.name,
 
         image: "https://razorpay.com/favicon.png",
 
@@ -41,7 +57,7 @@ const Payment = () => {
         },
 
         handler: function (response) {
-          console.log("Payment Success:", response);
+          console.log(response);
 
           alert("✅ Payment Successful");
 
@@ -58,8 +74,6 @@ const Payment = () => {
       const rzp = new window.Razorpay(options);
 
       rzp.on("payment.failed", function (response) {
-        console.log(response);
-
         alert(
           "Payment Failed\n\n" +
             response.error.description
@@ -82,29 +96,47 @@ const Payment = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 flex items-center justify-center text-white">
-      <div className="bg-slate-900 p-10 rounded-2xl w-[450px] shadow-xl">
+    <div className="min-h-screen bg-slate-950 flex items-center justify-center px-5">
 
-        <h1 className="text-3xl font-bold mb-6">
+      <div className="bg-slate-900 border border-cyan-500/20 p-10 rounded-3xl w-full max-w-md shadow-[0_0_40px_rgba(6,182,212,.25)]">
+
+        <h1 className="text-3xl font-bold text-white mb-8 text-center">
           Payment
         </h1>
 
-        <p className="text-lg">
-          Service Amount
-        </p>
+        <div className="space-y-6">
 
-        <h2 className="text-5xl font-bold text-cyan-400 mt-2 mb-8">
-          ₹999
-        </h2>
+          <div>
+            <p className="text-slate-400 text-sm">
+              Selected Service
+            </p>
 
-        <button
-          onClick={handlePayment}
-          className="w-full bg-cyan-500 hover:bg-cyan-600 py-4 rounded-xl text-lg font-semibold"
-        >
-          Pay Now
-        </button>
+            <h2 className="text-2xl font-bold text-white mt-1">
+              {service.name}
+            </h2>
+          </div>
+
+          <div>
+            <p className="text-slate-400 text-sm">
+              Total Amount
+            </p>
+
+            <h2 className="text-5xl font-bold text-cyan-400 mt-2">
+              ₹{service.price}
+            </h2>
+          </div>
+
+          <button
+            onClick={handlePayment}
+            className="w-full mt-6 bg-cyan-500 hover:bg-cyan-600 py-4 rounded-xl text-lg font-semibold text-white transition"
+          >
+            Pay ₹{service.price}
+          </button>
+
+        </div>
 
       </div>
+
     </div>
   );
 };

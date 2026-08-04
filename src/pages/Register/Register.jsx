@@ -1,33 +1,35 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { supabase } from "../../services/supabase";
+import { Link, useNavigate } from "react-router-dom";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebase";
 
 const Register = () => {
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleRegister = async () => {
+    if (!email || !password) {
+      alert("Please fill all fields");
+      return;
+    }
+
     try {
       setLoading(true);
 
-      const { data, error } = await supabase.auth.signUp({
+      await createUserWithEmailAndPassword(
+        auth,
         email,
-        password,
-      });
+        password
+      );
 
-      console.log("DATA:", data);
-      console.log("ERROR:", error);
+      alert("Registration Successful ✅");
 
-      if (error) {
-        alert(error.message);
-        return;
-      }
-
-      alert("Registration Successful! Please check your email.");
-    } catch (err) {
-      console.error(err);
-      alert(err.message || "Something went wrong.");
+      navigate("/login");
+    } catch (error) {
+      alert(error.message);
     } finally {
       setLoading(false);
     }
@@ -36,6 +38,7 @@ const Register = () => {
   return (
     <div className="min-h-screen bg-slate-950 flex items-center justify-center">
       <div className="bg-slate-900 p-10 rounded-2xl w-[400px] shadow-xl">
+
         <h1 className="text-3xl text-white font-bold mb-8 text-center">
           Register
         </h1>
@@ -44,7 +47,7 @@ const Register = () => {
           type="email"
           placeholder="Email"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e)=>setEmail(e.target.value)}
           className="w-full p-3 rounded mb-4 bg-white text-black"
         />
 
@@ -52,7 +55,7 @@ const Register = () => {
           type="password"
           placeholder="Password"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e)=>setPassword(e.target.value)}
           className="w-full p-3 rounded mb-6 bg-white text-black"
         />
 
@@ -70,6 +73,7 @@ const Register = () => {
         >
           Already have an account?
         </Link>
+
       </div>
     </div>
   );

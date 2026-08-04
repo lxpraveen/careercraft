@@ -1,29 +1,153 @@
+import { motion } from "framer-motion";
+import { TypeAnimation } from "react-type-animation";
+import { useNavigate } from "react-router-dom";
+
+import BackgroundGlow from "../BackgroundGlow";
+import FloatingIcons from "../FloatingIcons";
+import AnimatedLaptop from "../AnimatedLaptop";
+
 const Hero = () => {
+  const navigate = useNavigate();
+
   return (
-    <section className="min-h-[90vh] flex items-center justify-center px-6 bg-slate-950 text-white">
-      <div className="text-center max-w-4xl">
+    <section className="relative min-h-screen overflow-hidden bg-[#020617] text-white">
+      <BackgroundGlow />
+      <FloatingIcons />
 
-        <h1 className="text-6xl font-bold leading-tight">
-          Get Hired Faster with
-          <span className="text-cyan-400"> CareerCraft</span>
-        </h1>
+      <div className="relative z-10 max-w-7xl mx-auto px-6 py-24">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
 
-        <p className="mt-6 text-xl text-gray-400">
-          India's Premium Career Optimization Platform
-        </p>
+          {/* LEFT */}
 
-        <div className="mt-10 flex justify-center gap-5">
+          <div>
 
-          <button className="bg-cyan-500 px-8 py-4 rounded-xl hover:bg-cyan-600">
-            Explore Services
-          </button>
+            <motion.h1
+              initial={{ opacity: 0, y: 60 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="text-5xl md:text-7xl font-extrabold leading-tight"
+            >
+              Get Hired Faster
+              <br />
 
-          <button className="border border-cyan-500 px-8 py-4 rounded-xl">
-            Contact Us
-          </button>
+              With
+
+              <br />
+
+              <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-300 bg-clip-text text-transparent">
+                CareerCraft
+              </span>
+            </motion.h1>
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.8 }}
+              className="text-2xl font-semibold text-cyan-300 mt-8 h-10"
+            >
+              <TypeAnimation
+                sequence={[
+                  "LinkedIn Profile Optimization",
+                  2000,
+                  "ATS Resume Expert",
+                  2000,
+                  "Resume Optimization",
+                  2000,
+                  "Career Growth Services",
+                  2000,
+                ]}
+                repeat={Infinity}
+                speed={50}
+              />
+            </motion.div>
+
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.2 }}
+              className="mt-8 text-lg text-slate-300 leading-8 max-w-xl"
+            >
+              India's Premium Career Optimization Platform helping job seekers
+              build ATS-friendly resumes, optimize LinkedIn profiles,
+              improve recruiter visibility and get hired faster.
+            </motion.p>
+
+            {/* Buttons */}
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.5 }}
+              className="flex gap-5 mt-10 flex-wrap"
+            >
+              <motion.button
+                whileHover={{
+                  scale: 1.05,
+                  boxShadow: "0 0 30px rgba(34,211,238,.6)",
+                }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => navigate("/services")}
+                className="px-8 py-4 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-500 font-semibold"
+              >
+                🚀 Explore Services
+              </motion.button>
+
+              <motion.button
+                whileHover={{
+                  scale: 1.05,
+                  borderColor: "#22d3ee",
+                }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => navigate("/contact")}
+                className="px-8 py-4 rounded-xl border-2 border-cyan-500 font-semibold"
+              >
+                📞 Contact Us
+              </motion.button>
+            </motion.div>
+
+            {/* Stats */}
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 2 }}
+              className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16"
+            >
+              <div>
+                <h2 className="text-4xl font-bold text-cyan-400">1000+</h2>
+                <p className="text-slate-400 mt-2">Resumes</p>
+              </div>
+
+              <div>
+                <h2 className="text-4xl font-bold text-cyan-400">500+</h2>
+                <p className="text-slate-400 mt-2">LinkedIn</p>
+              </div>
+
+              <div>
+                <h2 className="text-4xl font-bold text-cyan-400">98%</h2>
+                <p className="text-slate-400 mt-2">Success</p>
+              </div>
+
+              <div>
+                <h2 className="text-4xl font-bold text-cyan-400">24×7</h2>
+                <p className="text-slate-400 mt-2">Support</p>
+              </div>
+            </motion.div>
+
+          </div>
+
+          {/* RIGHT */}
+
+          <motion.div
+            initial={{ opacity: 0, x: 120 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1 }}
+            className="flex justify-center"
+          >
+            <AnimatedLaptop />
+          </motion.div>
 
         </div>
-
       </div>
     </section>
   );
