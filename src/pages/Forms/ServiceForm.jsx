@@ -23,14 +23,31 @@ const ServiceForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Logged in user
+    const {
+      data: { user },
+      error: userError,
+    } = await supabase.auth.getUser();
+
+    if (userError || !user) {
+      alert("Please login first.");
+      return;
+    }
+
     const { error } = await supabase.from("orders").insert([
       {
-        ...form,
+        user_id: user.id,
+        full_name: form.full_name,
+        email: form.email,
+        service: form.service,
+        linkedin: form.linkedin,
+        requirements: form.requirements,
         status: "Pending",
       },
     ]);
 
     if (error) {
+      console.error(error);
       alert(error.message);
       return;
     }
@@ -49,41 +66,59 @@ const ServiceForm = () => {
         </h1>
 
         <input
+          type="text"
           name="full_name"
           placeholder="Full Name"
+          value={form.full_name}
           onChange={handleChange}
           className="w-full p-3 rounded mb-4"
+          required
         />
 
         <input
+          type="email"
           name="email"
           placeholder="Email"
+          value={form.email}
           onChange={handleChange}
           className="w-full p-3 rounded mb-4"
+          required
         />
 
         <input
+          type="text"
           name="service"
           placeholder="Service Name"
+          value={form.service}
           onChange={handleChange}
           className="w-full p-3 rounded mb-4"
+          required
         />
 
         <input
+          type="url"
           name="linkedin"
           placeholder="LinkedIn URL"
+          value={form.linkedin}
           onChange={handleChange}
           className="w-full p-3 rounded mb-4"
+          required
         />
 
         <textarea
           name="requirements"
           placeholder="Requirements"
+          value={form.requirements}
           onChange={handleChange}
           className="w-full p-3 rounded mb-6"
+          rows="5"
+          required
         />
 
-        <button className="w-full bg-cyan-500 py-3 rounded-xl">
+        <button
+          type="submit"
+          className="w-full bg-cyan-500 hover:bg-cyan-600 text-white py-3 rounded-xl"
+        >
           Submit Order
         </button>
       </form>
